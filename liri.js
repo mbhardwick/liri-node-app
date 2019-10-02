@@ -6,15 +6,13 @@ var Spotify = require('node-spotify-api');
 var keys = require("./keys.js");
 var moment = require('moment');
 
-
-
 //Spotify-This-Song
 var spotify = new Spotify(keys.spotify);
 var artistNames = function(artist) {
     return artist.name;
 }
-var spotifyThis = function(name){
-    spotify.search({type: 'track', query: name}, function(err, data) {
+var spotifyThis = function(songName){
+    spotify.search({type: 'track', query: songName}, function(err, data) {
         if (err) {
             console.log('Error occurred: '+err);
             return;
@@ -22,15 +20,32 @@ var spotifyThis = function(name){
         var songs = data.tracks.items;
         for(var i=0; i<songs.length; i++) {
             console.log(i);
-            console.log('artist(s): '+songs[i].artists.map(artistNames));
-            console.log('song name: '+songs[i].name);
-            console.log('preview song: '+songs[i].preview_url)
-            console.log('album: '+songs[i].album.name);
+            console.log('Artist(s): '+songs[i].artists.map(artistNames));
+            console.log('Song Name: '+songs[i].name);
+            console.log('Preview Song: '+songs[i].preview_url)
+            console.log('Album: '+songs[i].album.name);
             console.log('-----------------------------------------------')
         }
     });
 };
 
+//Movie-This
+var movieThis = function(movieName){
+    request('http://www.omdbapi.com/?apikey=trilogy&t='+movieName, function(error, response, body){
+        if (!error && response.statusCode == 200){
+            var data = JSON.parse(body);
+            console.log('Title: '+data.Title);
+            console.log('Year: '+data.Year);
+            console.log('IMDB Rating: '+data.imdbRating);
+            console.log('Rotten Tomatoes Rating: '+data.tomatoRating);
+            console.log('Country: '+data.Country);
+            console.log('Language: '+data.Language);
+            console.log('Plot: '+data.Plot);
+            console.log('Actors: '+data.Actors);
+        }
+    });
+}
+//Switch function
 var pick = function (caseData, functionData) {
     switch (caseData) {
         case 'concert-this':
@@ -40,7 +55,7 @@ var pick = function (caseData, functionData) {
             spotifyThis(functionData);
             break;
         case 'movie-this':
-            movieThis();
+            movieThis(functionData);
             break;
         case 'do-what-it-says':
             doThis();
