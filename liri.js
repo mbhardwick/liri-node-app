@@ -16,7 +16,7 @@ var logThis = function(logCommand){
 };
 //Concert-This
 var concertThis = function(artist){
-    axios.get('https://rest.bandsintown.com/artists/'+artist+'/events?app_id=codingbootcamp')
+    axios.get('https://rest.bandsintown.com/artists/'+artist+'/events?app_id='+keys.bandsInTown.id)
     .then(function(response){
         logThis('\n----------------------------------------')
         logThis('\nconcert-this: '+artist);
@@ -62,7 +62,7 @@ var movieThis = function(movieName){
     if (!movieName) {
         movieName = "Mr. Nobody";
     }
-    axios.get('http://www.omdbapi.com/?apikey=trilogy&t='+movieName)
+    axios.get('http://www.omdbapi.com/?apikey='+keys.omdb.id+'&t='+movieName)
     .then(function(response){
         logThis('\n----------------------------------------')
         logThis('\nmovie-this: '+movieName);
