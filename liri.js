@@ -10,8 +10,9 @@ var concertThis = function(artist){
     .then(function(response){
         for (var i=0;i<response.data.length; i++){
             console.log('Venue Name: '+response.data[i].venue.name);
-            console.log('Venue Location: '+response.data[i].venue.city+', '+response.data[i].venue.country);
+            console.log('Venue Location: '+response.data[i].venue.city+', '+response.data[i].venue.region+' '+response.data[i].venue.country);
             console.log('Concert Date: '+moment(response.data[i].datetime).format('L'));
+            console.log('-------------------------------------------------')
         }
     });
 }
