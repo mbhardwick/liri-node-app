@@ -1,4 +1,5 @@
 require("dotenv").config();
+//Packages
 var fs = require('fs');
 var Spotify = require('node-spotify-api');
 var axios = require('axios');
@@ -21,10 +22,11 @@ var spotify = new Spotify(keys.spotify);
 var artistNames = function(artist) {
     return artist.name;
 }
+//Default Output
 var spotifyThis = function(songName){
     if (!songName) {
         songName = "The Sign Ace of Base";
-    };
+    }
     spotify.search({type: 'track', query: songName}, function(err, data) {
         if (err) {
             console.log('Error occurred: '+err);
@@ -43,9 +45,10 @@ var spotifyThis = function(songName){
 };
 //Movie-This
 var movieThis = function(movieName){
+    //Default Output
     if (!movieName) {
         movieName = "Mr. Nobody";
-    };
+    }
     axios.get('http://www.omdbapi.com/?apikey=trilogy&t='+movieName)
     .then(function(response){
             console.log('Title: '+response.data.Title);
@@ -58,6 +61,16 @@ var movieThis = function(movieName){
             console.log('Actors: '+response.data.Actors);
         })
     };
+//Do-What-It-Says
+var doThis = function(){
+    fs.readFile('random.txt', 'utf8', function(err, data){
+        if (err){
+            console.log(err);
+        }
+        var readArr = data.split(',');
+        spotifyThis(readArr[1]);
+    })
+};
 //Switch function
 var pick = function (caseData, functionData) {
     switch (caseData) {
@@ -71,7 +84,7 @@ var pick = function (caseData, functionData) {
             movieThis(functionData);
             break;
         case 'do-what-it-says':
-            doThis();
+            doThis(functionData);
             break;
         default:
             console.log('LIRI does not know that');
@@ -81,4 +94,3 @@ var runThis = function(argOne, argTwo) {
     pick(argOne, argTwo);
 };
 runThis(process.argv[2], process.argv[3]);
-
