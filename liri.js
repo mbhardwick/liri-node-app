@@ -89,7 +89,8 @@ var pick = function (caseData, functionData) {
         default:
             console.log('LIRI does not know that');
     }
-}
+};
+//Function to take in the arguments
 var runThis = function(argOne, argTwo) {
     pick(argOne, argTwo);
 };
