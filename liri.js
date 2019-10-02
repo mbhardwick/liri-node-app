@@ -1,11 +1,13 @@
 require("dotenv").config();
-var request = require('request');
 var fs = require('fs');
 var Spotify = require('node-spotify-api');
-
+var axios = require('axios');
 var keys = require("./keys.js");
 var moment = require('moment');
-
+// //Concert-This
+// request('https://rest.bandsintown.com/artists/' +Blackstreet+ '/events?app_id=codingbootcamp', function(error, response, body){
+//     if(!error)
+// })
 //Spotify-This-Song
 var spotify = new Spotify(keys.spotify);
 var artistNames = function(artist) {
@@ -31,20 +33,18 @@ var spotifyThis = function(songName){
 
 //Movie-This
 var movieThis = function(movieName){
-    request('http://www.omdbapi.com/?apikey=trilogy&t='+movieName, function(error, response, body){
-        if (!error && response.statusCode == 200){
-            var data = JSON.parse(body);
-            console.log('Title: '+data.Title);
-            console.log('Year: '+data.Year);
-            console.log('IMDB Rating: '+data.imdbRating);
-            console.log('Rotten Tomatoes Rating: '+data.tomatoRating);
-            console.log('Country: '+data.Country);
-            console.log('Language: '+data.Language);
-            console.log('Plot: '+data.Plot);
-            console.log('Actors: '+data.Actors);
-        }
-    });
-}
+    axios.get('http://www.omdbapi.com/?apikey=trilogy&t='+movieName)
+    .then(function(response){
+            console.log('Title: '+response.data.Title);
+            console.log('Year: '+response.data.Year);
+            console.log('IMDB Rating: '+response.data.imdbRating);
+            console.log('Rotten Tomatoes Rating: '+response.data.tomatoRating);
+            console.log('Country: '+response.data.Country);
+            console.log('Language: '+response.data.Language);
+            console.log('Plot: '+response.data.Plot);
+            console.log('Actors: '+response.data.Actors);
+        })
+    };
 //Switch function
 var pick = function (caseData, functionData) {
     switch (caseData) {
