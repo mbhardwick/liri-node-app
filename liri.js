@@ -22,6 +22,9 @@ var artistNames = function(artist) {
     return artist.name;
 }
 var spotifyThis = function(songName){
+    if (!songName) {
+        songName = "The Sign Ace of Base";
+    };
     spotify.search({type: 'track', query: songName}, function(err, data) {
         if (err) {
             console.log('Error occurred: '+err);
@@ -40,6 +43,9 @@ var spotifyThis = function(songName){
 };
 //Movie-This
 var movieThis = function(movieName){
+    if (!movieName) {
+        movieName = "Mr. Nobody";
+    };
     axios.get('http://www.omdbapi.com/?apikey=trilogy&t='+movieName)
     .then(function(response){
             console.log('Title: '+response.data.Title);
@@ -71,13 +77,8 @@ var pick = function (caseData, functionData) {
             console.log('LIRI does not know that');
     }
 }
-
 var runThis = function(argOne, argTwo) {
     pick(argOne, argTwo);
 };
 runThis(process.argv[2], process.argv[3]);
-// //Bands in Town Artist Events
-// var concertThis = function(artist) {
-//     var queryURL=("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
-// };
 
