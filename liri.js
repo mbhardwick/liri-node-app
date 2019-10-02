@@ -4,10 +4,17 @@ var Spotify = require('node-spotify-api');
 var axios = require('axios');
 var keys = require("./keys.js");
 var moment = require('moment');
-// //Concert-This
-// request('https://rest.bandsintown.com/artists/' +Blackstreet+ '/events?app_id=codingbootcamp', function(error, response, body){
-//     if(!error)
-// })
+//Concert-This
+var concertThis = function(artist){
+    axios.get('https://rest.bandsintown.com/artists/'+artist+'/events?app_id=codingbootcamp')
+    .then(function(response){
+        for (var i=0;i<response.data.length; i++){
+            console.log('Venue Name: '+response.data[i].venue.name);
+            console.log('Venue Location: '+response.data[i].venue.city+', '+response.data[i].venue.country);
+            console.log('Concert Date: '+moment(response.data[i].datetime).format('L'));
+        }
+    });
+}
 //Spotify-This-Song
 var spotify = new Spotify(keys.spotify);
 var artistNames = function(artist) {
@@ -30,7 +37,6 @@ var spotifyThis = function(songName){
         }
     });
 };
-
 //Movie-This
 var movieThis = function(movieName){
     axios.get('http://www.omdbapi.com/?apikey=trilogy&t='+movieName)
@@ -49,7 +55,7 @@ var movieThis = function(movieName){
 var pick = function (caseData, functionData) {
     switch (caseData) {
         case 'concert-this':
-            concertThis();
+            concertThis(functionData);
             break;
         case 'spotify-this-song':
             spotifyThis(functionData);
