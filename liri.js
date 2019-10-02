@@ -18,6 +18,8 @@ var logThis = function(logCommand){
 var concertThis = function(artist){
     axios.get('https://rest.bandsintown.com/artists/'+artist+'/events?app_id=codingbootcamp')
     .then(function(response){
+        logThis('\n----------------------------------------')
+        logThis('\nconcert-this: '+artist);
         for (var i=0;i<response.data.length; i++){
             logThis('\n----------------------------------------')
             logThis('\nVenue Name: '+response.data[i].venue.name);
@@ -42,6 +44,8 @@ var spotifyThis = function(songName){
             return;
         }
         var songs = data.tracks.items;
+        logThis('\n----------------------------------------')
+        logThis('\nspotify-this-song: '+songName);
         for(var i=0; i<songs.length; i++) {
             logThis('\n----------------------------------------')
             logThis('\n'+i);
@@ -61,14 +65,16 @@ var movieThis = function(movieName){
     axios.get('http://www.omdbapi.com/?apikey=trilogy&t='+movieName)
     .then(function(response){
         logThis('\n----------------------------------------')
-            logThis('\nTitle: '+response.data.Title);
-            logThis('\nYear: '+response.data.Year);
-            logThis('\nIMDB Rating: '+response.data.imdbRating);
-            logThis('\nRotten Tomatoes Rating: '+response.data.tomatoRating);
-            logThis('\nCountry: '+response.data.Country);
-            logThis('\nLanguage: '+response.data.Language);
-            logThis('\nPlot: '+response.data.Plot);
-            logThis('\nActors: '+response.data.Actors);
+        logThis('\nmovie-this: '+movieName);
+        logThis('\n----------------------------------------')
+        logThis('\nTitle: '+response.data.Title);
+        logThis('\nYear: '+response.data.Year);
+        logThis('\nIMDB Rating: '+response.data.imdbRating);
+        logThis('\nRotten Tomatoes Rating: '+response.data.tomatoRating);
+        logThis('\nCountry: '+response.data.Country);
+        logThis('\nLanguage: '+response.data.Language);
+        logThis('\nPlot: '+response.data.Plot);
+        logThis('\nActors: '+response.data.Actors);
         })
     };
 //Do-What-It-Says
@@ -78,6 +84,7 @@ var doThis = function(){
             logThis(err);
         }
         var readArr = data.split(',');
+        logThis('do-what-it-says: ');
         logThis('\n----------------------------------------')
         spotifyThis(readArr[1]);
     })
@@ -86,19 +93,15 @@ var doThis = function(){
 var pick = function (caseData, functionData) {
     switch (caseData) {
         case 'concert-this':
-            logThis('concert-this: ');
             concertThis(functionData);
             break;
         case 'spotify-this-song':
-            logThis('spotify-this-song: ');
             spotifyThis(functionData);
             break;
         case 'movie-this':
-            logThis('movie-this: ');
             movieThis(functionData);
             break;
         case 'do-what-it-says':
-            logThis('do-what-it-says: ');
             doThis(functionData);
             break;
         default:
