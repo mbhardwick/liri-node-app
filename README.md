@@ -9,24 +9,28 @@ LIRI is a Language Interpretation and Recognition Interface. LIRI is a command l
 
 ## Running the App
 *Into the command line type ```node liri.js```
-	*To lookup a concert type ```concert-this [band name]```
-	*To lookup a song on Spotify type ```spotify-this-song [song name]```
-	*To lookup a movie type ```movie-this [movie name]```
+
+*To lookup a concert type `concert-this [band name]`
+
+*To lookup a song on Spotify type ```spotify-this-song [song name]```
+
+*To lookup a movie type ```movie-this [movie name]```
+
 * *OR* give liri a command by typing it into the random.txt file using ```[command],"[search query]" ``` then in the command line type ```do-what-it-says```
 *All queries will be logged to log.txt
 
 
 ## Examples
 
-![Image of concert-this](images/concert.png)
-![Image of spotify-this-song](images/spotify.png)
-![Image of movie-this](images/movie.png)
-![Image of do-what-it-says](images/do.png)
+![Image of concert-this](images/concert.PNG)
+![Image of spotify-this-song](images/spotify.PNG)
+![Image of movie-this](images/movie.PNG)
+![Image of do-what-it-says](images/do.PNG)
 
 ### Extras
 *If the search query for songs or movies is left blank they will default to The Sign by Ace of Base and Mr. Nobody.
 
-![Image of spotify default](images/spotify2.png)
+![Image of spotify default](images/spotify2.PNG)
 
 ## Built With
 * [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api)
